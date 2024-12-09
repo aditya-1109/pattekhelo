@@ -11,8 +11,14 @@ dotenv.config();
 
 const port= process.env.port || 4000;
 
+const corsOptions = {
+  origin: "https://spectacular-profiterole-a526b4.netlify.app", // Allow only this origin
+  methods: ["GET", "POST", "PUT", "DELETE"], // Define allowed HTTP methods
+  credentials: true, // Allow credentials (e.g., cookies, authentication headers)
+};
+
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Connect to MongoDB
@@ -26,7 +32,10 @@ app.get("/", (req,res)=>{
 app.use("/api/user/", userRouter);
 
 const io = new Server(server, {
-  cors: { origin: "*" },
+  cors: {
+    origin: "https://spectacular-profiterole-a526b4.netlify.app",
+    methods: ["GET", "POST"], // Allow only these HTTP methods
+  }
 });
 
 const deck = [
