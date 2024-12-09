@@ -21,6 +21,8 @@ const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
 
+app.options("*", cors(corsOptions)); // Enable preflight for all routes
+
 // Connect to MongoDB
 mongoose.connect(`${process.env.mongoDb_url}`)
 const server = http.createServer(app);
