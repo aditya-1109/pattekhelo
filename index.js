@@ -19,6 +19,10 @@ app.use(express.json());
 mongoose.connect(`${process.env.mongoDb_url}`)
 const server = http.createServer(app);
 
+app.get("/", (req,res)=>{
+  res.status(200).send("hello")
+})
+
 app.use("/api/user/", userRouter);
 
 const io = new Server(server, {
