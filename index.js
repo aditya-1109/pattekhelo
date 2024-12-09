@@ -13,9 +13,10 @@ const port= process.env.port || 4000;
 
 
 const app = express();
-app.use(cors());
+app.use(cors({origin: "*"}));
 app.use(express.json());
 
+app.options("*", cors(corsOptions)); // Enable preflight for all routes
 
 // Connect to MongoDB
 mongoose.connect(`${process.env.mongoDb_url}`)
